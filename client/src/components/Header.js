@@ -9,15 +9,11 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.authService = new AuthService();
-    this.state = {user: ''}
     this.logout = this.logout.bind(this);
   }
   
   componentDidMount() {
-    this.authService.isLoggedIn()
-    .then(userLogged => {
-      this.setState({user: userLogged})
-    })
+    
   }
 
   logout() {
@@ -29,26 +25,26 @@ class Header extends Component {
 
 
   render() {
-    const user = this.state.user;
+    const user = this.props.user;
     return (
       <header>
           <Logo src="./assets/images/logo.svg"></Logo>
           { !user &&
             <div className="header-links">
               <Link to="/">Home</Link>
-              <Button type="link dark" text="Login" value="Login" onClick={this.props.onToggle}></Button>
-              <Button type="btn dark" text="Signup" value="Signup" onClick={this.props.onToggle}></Button>
+              <Link className="link dark" to={"/login"}>Login</Link>
+              <Link className="btn dark" to={"/signup"}>Signup</Link>
             </div>
           }
           {
             user &&
             <div className="header-user">
+              <p>Hello {user.name}!</p>
               <div className="new-article-wrapper">
                 <img src="/assets/images/plus.svg" onClick={this.props.onToggleArticleForm}/>
               </div>
+                <Button type="btn dark" text="Logout" value="Signup" onClick={this.logout}></Button>
               
-              <p>Hello {user.name}!</p>
-              <Button type="btn dark" text="Logout" value="Signup" onClick={this.logout}></Button>
             </div>
           }
         </header>

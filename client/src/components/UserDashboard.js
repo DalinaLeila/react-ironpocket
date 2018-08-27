@@ -19,7 +19,9 @@ class UserDashboard extends Component {
   componentDidMount() {
     this.articlesService.getArticles()
     .then(userArticles => {
-      if (userArticles.length) this.setState({articles: userArticles})
+      if (userArticles.length) {
+        this.setState({articles: userArticles})
+      }
     })
     .catch(error => console.log(error))
   }
@@ -37,10 +39,11 @@ class UserDashboard extends Component {
   }
 
   render() {
+    const { user } = this.props;
     const { showArticleForm } = this.state;
     return (
       <div>
-        <Header onToggleArticleForm={this.toggleNewArticleDialog}></Header>
+        <Header onToggleArticleForm={this.toggleNewArticleDialog} user={user}></Header>
         <FilterCol></FilterCol>
         <ArticlesList articles={this.state.articles}></ArticlesList>
         {

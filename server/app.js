@@ -29,6 +29,14 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
+// Enable authentication using session + passport
+app.use(session({
+  secret: 'irongenerator',
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
+}))
+
 const corsOptions = {
   origin: 'http://localhost:4200',
   credentials: true,
@@ -72,13 +80,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
-// Enable authentication using session + passport
-app.use(session({
-  secret: 'irongenerator',
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
-}))
+
 app.use(flash());
 require('./passport')(app);
     

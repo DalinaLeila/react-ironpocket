@@ -45,6 +45,7 @@ header>img {
   padding: 15px 30px;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn.dark {
@@ -146,31 +147,43 @@ footer {
   font-weight: 200;
 }
 
+
+
 .form-page-wrapper {
-  position: fixed;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.57);
-  justify-content: center;
-  align-items: center;
   display: flex;
 }
 
+.left-column-image {
+  width: 50%;
+  background: #32C3FF;
+}
+
 .form-wrapper {
-  width: 30%;
-  height: auto;
-  padding: 0 25px 50px 25px;
-  margin: 0 auto;
+  width: 50%;
+  height: 100vh;
+  padding: 0 25px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   position: relative;
 }
 
+.form-wrapper img {
+  width: 30%;
+  margin: 0 auto;
+}
+
 .form-wrapper h2 {
-  margin: 40px 0;
+  margin: 20px 0 0 0;
+}
+
+.form-wrapper form {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .form-wrapper fieldset {
@@ -178,28 +191,42 @@ footer {
   flex-direction: column;
   border: 0;
   text-align: left;
+  margin: 40px 0;
 }
+
+.form-wrapper .signup fieldset {
+  margin: 10px 0;
+}
+
 
 .form-wrapper label {
   font-weight: 200;
   font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.form-wrapper p, .form-wrapper span {
+  font-weight: 100;
 }
 
 .form-wrapper input, .new-article-form input {
   width: 100%;
-  border: 1px solid rgba(204, 206, 215, 0.5);
-  background-color: rgba(204, 206, 215, 0.103);
+  border: 1px solid rgba(204, 206, 215, 0.35);
+  background-color: rgba(204, 206, 215, 0.043);
   border-radius: 5px;
-  padding: 8px 5px;
+  padding: 8px 10px;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .submit-form-btn {
   color: #fff;
-  padding: 15px 22px;
+  padding: 20px 80px;
   background-color: #1F2534;
   border-radius: 5px;
-  margin-top: 20px;
-  font-size: 15px;
+  margin: 20px 0;
+  font-size: 20px;
 }
 
 .change-form {
@@ -219,6 +246,10 @@ footer {
   right: 45px;
   top: 25px;
   cursor: pointer;
+}
+
+.error-msg {
+  color: rgb(160, 37, 37);
 }
 
 .close-button-small {

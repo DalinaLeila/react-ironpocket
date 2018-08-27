@@ -1,47 +1,36 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import MainLanding from './MainLanding';
 import Footer from './Footer';
-import Form from './Form';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import AuthService from '../lib/auth-service';
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {showForm: false, formType: 'Signup', user: ''};
-    this.toggleFormDialog = this.toggleFormDialog.bind(this);
+    this.state = {user: ''};
     this.authService = new AuthService();
-  }
-
-  toggleFormDialog(event) {
-    let formType = event.target.getAttribute('value');
-    this.setState(prevState => ({showForm: !prevState.showForm, formType}))
-  }
-
-  componentDidMount() {
-    this.authService.isLoggedIn()
-    .then(userLogged => {
-      if(userLogged) {
-        this.props.history.push('/dashboard');
-      }  
-    })
   }
   
   render() {
-    const { showForm } = this.state;
+    const { user } = this.props;
     return (
       <div className="landing-wrapper">
-        <Header onToggle={this.toggleFormDialog}></Header>
-        <MainLanding onToggle={this.toggleFormDialog}></MainLanding>
+        <Header></Header>
+        <div className="main-landing-wrapper">
+        <h1>When you find something you want to view later, put it in Pocket!</h1>
+        <div className="landing-form-wrapper">
+          <h2>Register</h2>
+          <Link className="btn light" to={"/signup"}>Create your Account</Link>
+          <div className="separator">or</div>
+          <div className="login-wrapper">
+            <p>Or if you already have an account</p>
+            <Link className="link light" to={"/login"}>Login</Link>
+          </div>  
+        </div>
+        </div>
         <Footer></Footer>
-        {
-          showForm &&
-          <Form onToggle={this.toggleFormDialog} type={this.state.formType}></Form>
-        }
-
       </div>
-    );
+    )
   }
 }
 
