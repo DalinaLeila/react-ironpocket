@@ -38,6 +38,35 @@ router.get('/all', (req, res, next) => {
   })
 });
 
+router.get('/filter', (req, res, next) => {
+  const type = req.query.type;
+  const filter = {};
+  filter[type] = true;
+  Article.find(filter)
+  .then(articles => {
+    res.status(200).json(articles)
+  })
+  .catch(error => {
+    next(error)
+  })
+});
+
+router.post('/update', (req, res, next) => {
+  const action = req.query.action;
+  const update = {}
+  Article.findById(req.body.articleId)
+  .then(article => {
+    update[action] = !article[action];
+    Article.findByIdAndUpdate(req.body.articleId, {$set: update}, {new: true})
+    .then(response => {
+      res.status(200).json(response)
+    })
+  })
+  .catch(error => {
+    next(error)
+  })
+});
+
 router.post('/remove', (req, res, next) => {
   Article.findByIdAndRemove(req.body.articleId)
   .then(response => {

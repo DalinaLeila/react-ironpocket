@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="19px" height="18px" viewBox="0 0 19 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
-    <title>Star - FontAwesome</title>
+    <title>star</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="FontAwesome" font-size="20" font-weight="normal">
-        <g id="Card-Hover" transform="translate(-386.000000, -396.000000)" fill="#CECECE">
-            <text id="Star---FontAwesome">
-                <tspan x="386" y="413"></tspan>
-            </text>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="FontAwesome" font-size="20" font-weight="normal">
+        <g id="Desktop-HD" transform="translate(-385.000000, -927.000000)" fill="#F8E71C">
+            <g id="star" transform="translate(385.000000, 927.000000)">
+                <text id="">
+                    <tspan x="0" y="17"></tspan>
+                </text>
+            </g>
         </g>
     </g>
 </svg>

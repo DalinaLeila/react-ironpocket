@@ -8,24 +8,39 @@ class ArticlesList extends Component {
     super(props);
     this.articleService = new ArticlesService();
     this.removeArticle = this.removeArticle.bind(this);
-    this.state = {articles: this.props.articles}
+    this.updateArticle = this.updateArticle.bind(this);
+    this.state = {articles: []}
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.articles !== prevProps.articles) {
+      this.setState({articles: this.props.articles});
+    }
   }
 
   removeArticle(articleId) {
     this.articleService.remove(articleId)
     .then(response => {
-      this.props.articles.filter(article => article._id !== articleId);
+      let newArticles = this.props.articles.filter(article => article._id !== articleId);
+      this.setState({articles: newArticles})
+    })
+    .catch(error => console.log(error))
+  }
+
+  updateArticle(articleId, action) {
+    this.articleService.update(articleId, action)
+    .then(() => {
+      this.props.filterArticlesDashboard();
     })
     .catch(error => console.log(error))
   }
 
   render() {
-    const { articles } = this.props;
-    console.log(this.state)
+    const { articles } = this.state;
     return articles ? (
       <div className="articles-wrapper">
         {
-          articles.map(article => <ArticleItem data={article} key={article._id} removeArticleItem={this.removeArticle} ></ArticleItem>)
+          articles.map(article => <ArticleItem data={article} key={article._id} removeArticleItem={this.removeArticle} updateArticleItem={this.updateArticle} ></ArticleItem>)
         }
       </div> 
     ) : '';

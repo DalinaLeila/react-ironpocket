@@ -350,11 +350,16 @@ footer {
 }
 
 .icons-wrapper img {
-  height: 20px;
-  width: 20px;
+  height: 14px;
+  width: 14px;
   border-radius: 0;
   margin-right: 8px;
   cursor: pointer;
+  object-fit: contain;
+}
+
+.icons-wrapper img.inactive {
+  filter: grayscale(1);
 }
 
 .new-article-wrapper {
@@ -377,6 +382,10 @@ footer {
     border-radius: 5px;
     width: 300px;
     z-index: 10;
+}
+
+.filter-column-wrapper {
+  cursor: pointer;
 }
 
 .new-article-form p {

@@ -10,13 +10,23 @@ import NewArticle from './NewArticle';
 class UserDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {articles: [], showArticleForm: false}
+    this.state = {articles: [], showArticleForm: false, type: 'all'}
     this.toggleNewArticleDialog = this.toggleNewArticleDialog.bind(this);
+    this.getAllArticles = this.getAllArticles.bind(this);
     this.addNewArticle = this.addNewArticle.bind(this);
+    this.filterArticles = this.filterArticles.bind(this);
     this.articlesService = new ArticlesService();
   }
 
   componentDidMount() {
+    this.getAllArticles();
+  }
+
+  toggleNewArticleDialog() {
+    this.setState(prevState => ({showArticleForm: !prevState.showArticleForm}))
+  }
+
+  getAllArticles() {
     this.articlesService.getArticles()
     .then(userArticles => {
       if (userArticles.length) {
@@ -26,8 +36,19 @@ class UserDashboard extends Component {
     .catch(error => console.log(error))
   }
 
-  toggleNewArticleDialog() {
-    this.setState(prevState => ({showArticleForm: !prevState.showArticleForm}))
+  filterArticles(type) { 
+    this.setState(prevState => {
+      if(!type) type = prevState['type']
+      if (type !== 'all') {
+        this.articlesService.filterArticles(type)
+        .then(articles => {
+          this.setState({articles})
+        })
+      } else {
+        this.getAllArticles();
+      }
+      return { type }
+    });
   }
 
   addNewArticle(url) {
@@ -44,8 +65,8 @@ class UserDashboard extends Component {
     return (
       <div>
         <Header onToggleArticleForm={this.toggleNewArticleDialog} user={user}></Header>
-        <FilterCol></FilterCol>
-        <ArticlesList articles={this.state.articles}></ArticlesList>
+        <FilterCol filterArticlesDashboard={this.filterArticles}></FilterCol>
+        <ArticlesList articles={this.state.articles} filterArticlesDashboard={this.filterArticles}></ArticlesList>
         {
           showArticleForm &&
           <NewArticle onToggleArticleForm={this.toggleNewArticleDialog} addNewArticleForm={this.addNewArticle}></NewArticle>

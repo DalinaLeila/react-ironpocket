@@ -21,6 +21,18 @@ class ArticlesService {
     .catch(error => error)
   }
 
+  filterArticles = (type) => {
+    return this.service.get(`/filter?type=${type}`)
+    .then(response => response.data)
+    .catch(error => error)
+  }
+
+  update = (articleId, action) => {
+    return this.service.post(`/update?action=${action}`, {articleId})
+    .then(response => response.data)
+    .catch(error => error)
+  }
+
   remove = (articleId) => {
     return this.service.post('/remove', {articleId})
     .then(response => response.data)
